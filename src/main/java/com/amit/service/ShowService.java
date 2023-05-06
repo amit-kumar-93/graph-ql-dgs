@@ -1,18 +1,14 @@
-package com.amit.controller;
+package com.amit.service;
 
 import com.amit.types.Review;
 import com.amit.types.Show;
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsQuery;
-import com.netflix.graphql.dgs.InputArgument;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-
-@DgsComponent
-public class ShowDataFetcher {
+@Service
+public class ShowService {
 
     private List<Review> oarkReviews = Arrays.asList(
             Review.newBuilder().starRating(5).build(),
@@ -39,12 +35,7 @@ public class ShowDataFetcher {
             Show.newBuilder().title("Milano").releaseYear(2015).reviews(Milano).build()
     );
 
-
-    @DgsQuery
-    public List<Show> shows(@InputArgument String titleFilter) {
-        if (titleFilter != null) {
-            return shows.stream().filter(show -> show.getTitle().startsWith(titleFilter)).collect(Collectors.toList());
-        }
+    public List<Show> shows() {
         return shows;
     }
 }

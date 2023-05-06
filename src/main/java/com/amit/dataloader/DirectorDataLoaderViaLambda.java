@@ -8,6 +8,7 @@ import org.dataloader.BatchLoader;
 import org.dataloader.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -17,11 +18,9 @@ public class DirectorDataLoaderViaLambda {
     DirectorServiceClient directorServiceClient;
 
     @DgsDataLoader(name = "directorsViaLambda")
-    public BatchLoader<String, Try<Director>> directorBatchLoader =
-            keys -> CompletableFuture.supplyAsync(
-                    () -> keys.stream()
-                            .map(key -> Try.tryCall(
-                                    () -> directorServiceClient.loadDirector(keys)
-                            ))
-                            .collect(Collectors.toList()));
+    public BatchLoader<String, List<Director>> directorBatchLoader =
+            keys -> CompletableFuture.supplyAsync(() ->
+                keys.stream()
+                        .map(key -> Try.tryCall(() -> directorServiceClient.loadDirectorsList(keys)).get())
+                        .collect(Collectors.toList()));
 }

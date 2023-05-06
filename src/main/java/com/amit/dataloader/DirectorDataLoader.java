@@ -13,7 +13,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 
 @DgsDataLoader(name = "directors")
-public class DirectorDataLoader implements BatchLoader<String, Try<Director>> {
+public class DirectorDataLoader implements BatchLoader<String, Try<List<Director>>> {
 
     @Autowired
     DirectorServiceClient directorServiceClient;
@@ -26,14 +26,16 @@ public class DirectorDataLoader implements BatchLoader<String, Try<Director>> {
 
     /**
      * Data Loader with {@link org.dataloader.Try}
+     *
      * @param keys
      * @return List<T>
      */
     @Override
-    public CompletionStage<List<Try<Director>>> load(List<String> keys) {
+    public CompletionStage<List<Try<List<Director>>>> load(List<String> keys) {
         return CompletableFuture.supplyAsync(() ->
                 keys.stream()
-                        .map(key -> Try.tryCall(() -> directorServiceClient.loadDirector(keys)))
+                        .map(key -> Try.tryCall(() -> directorServiceClient.loadDirectorsList(keys)))
                         .collect(Collectors.toList()));
+
     }
 }

@@ -6,8 +6,15 @@ type Show{
 title: String
 releaseYear: Int
 reviews: [Review]
+directors: [Director]
 }
 
 type Review{
 starRating: Int
+}
+
+type Director{
+name: String
+rating: Int
+showsDirected: Int
 }

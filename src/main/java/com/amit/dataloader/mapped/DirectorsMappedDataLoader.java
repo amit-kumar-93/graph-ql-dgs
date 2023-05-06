@@ -5,26 +5,32 @@ import com.amit.types.Director;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsDataLoader;
 import org.dataloader.MappedBatchLoader;
+import org.dataloader.MappedBatchLoaderWithContext;
 import org.dataloader.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @DgsComponent
 public class DirectorsMappedDataLoader {
     @Autowired
     DirectorServiceClient directorServiceClient;
 
+//    @DgsDataLoader(name = "directorsMappedDataLoaderLambda")
+//    public MappedBatchLoader<String, List<Director>> mappedBatchLoader =
+//           keys -> CompletableFuture.supplyAsync(() -> keys.stream()
+//                   .map(key -> Try.tryCall(() -> directorServiceClient.loadDirectorsMapped(key)))
+//                   .map( x-> x.get())
+//                   .reduce((m1,m2)-> {m1.putAll(m2); return m1;}).get());
+
     @DgsDataLoader(name = "directorsMappedDataLoaderLambda")
-    public MappedBatchLoader<String, Try<Director>> mappedBatchLoader =
-            keys -> CompletableFuture.supplyAsync(
-                    () -> keys.stream().
-                            map(
-                                    key -> Try.tryCall(
-                                            () -> directorServiceClient.loadDirector(keys))
-                            )
-                            .collect(Collectors.toMap(x->(x.get()).getName(), Function.identity() , (existing, newOne) -> existing)));
+    public MappedBatchLoader<String, List<Director>> mappedBatchLoader =
+            keys -> CompletableFuture.supplyAsync(() ->
+                    Try.tryCall(()->
+                            directorServiceClient.loadDirectors(new ArrayList<>(keys))
+                    ).get()
+            );
 
 }
