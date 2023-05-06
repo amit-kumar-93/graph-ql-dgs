@@ -13,6 +13,8 @@ public class Show {
 
   private List<Review> reviews;
 
+  private List<Director> directors;
+
   public Show() {
   }
 
@@ -40,9 +42,17 @@ public class Show {
     this.reviews = reviews;
   }
 
+  public List<Director> getDirectors() {
+    return directors;
+  }
+
+  public void setDirectors(List<Director> directors) {
+    this.directors = directors;
+  }
+
   @Override
   public String toString() {
-    return "Show{" + "title='" + title + "'," +"releaseYear='" + releaseYear + "'," +"reviews='" + reviews + "'" +"}";
+    return "Show{" + "title='" + title + "'," +"releaseYear='" + releaseYear + "'," +"reviews='" + reviews + "'," +"directors='" + directors + "'" +"}";
   }
 
   @Override
@@ -52,12 +62,13 @@ public class Show {
         Show that = (Show) o;
         return java.util.Objects.equals(title, that.title) &&
                             java.util.Objects.equals(releaseYear, that.releaseYear) &&
-                            java.util.Objects.equals(reviews, that.reviews);
+                            java.util.Objects.equals(reviews, that.reviews) &&
+                            java.util.Objects.equals(directors, that.directors);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(title, releaseYear, reviews);
+    return java.util.Objects.hash(title, releaseYear, reviews, directors);
   }
 
   public static com.amit.types.Show.Builder newBuilder() {
@@ -71,11 +82,14 @@ public class Show {
 
     private List<Review> reviews;
 
+    private List<Director> directors;
+
     public Show build() {
                   com.amit.types.Show result = new com.amit.types.Show();
                       result.title = this.title;
           result.releaseYear = this.releaseYear;
           result.reviews = this.reviews;
+          result.directors = this.directors;
                       return result;
     }
 
@@ -91,6 +105,11 @@ public class Show {
 
     public com.amit.types.Show.Builder reviews(List<Review> reviews) {
       this.reviews = reviews;
+      return this;
+    }
+
+    public com.amit.types.Show.Builder directors(List<Director> directors) {
+      this.directors = directors;
       return this;
     }
   }

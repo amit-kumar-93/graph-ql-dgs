@@ -23,11 +23,23 @@ public class DgsConstants {
     public static final String ReleaseYear = "releaseYear";
 
     public static final String Reviews = "reviews";
+
+    public static final String Directors = "directors";
   }
 
   public static class REVIEW {
     public static final String TYPE_NAME = "Review";
 
     public static final String StarRating = "starRating";
+  }
+
+  public static class DIRECTOR {
+    public static final String TYPE_NAME = "Director";
+
+    public static final String Name = "name";
+
+    public static final String Rating = "rating";
+
+    public static final String ShowsDirected = "showsDirected";
   }
 }
