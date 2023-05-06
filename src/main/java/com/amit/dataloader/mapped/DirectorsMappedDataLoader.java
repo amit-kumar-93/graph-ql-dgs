@@ -8,13 +8,19 @@ import org.dataloader.MappedBatchLoader;
 import org.dataloader.MappedBatchLoaderWithContext;
 import org.dataloader.Try;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 @DgsComponent
 public class DirectorsMappedDataLoader {
+    @Autowired
+//    @Qualifier("cachedThreadPoolBean") // Use when Common Thread Pool is not to be used. Cached Threads re-use existing threads
+    private Executor executor;
+
     @Autowired
     DirectorServiceClient directorServiceClient;
 
@@ -25,12 +31,12 @@ public class DirectorsMappedDataLoader {
 //                   .map( x-> x.get())
 //                   .reduce((m1,m2)-> {m1.putAll(m2); return m1;}).get());
 
-    @DgsDataLoader(name = "directorsMappedDataLoaderLambda")
+    @DgsDataLoader(name = "directorsMappedDataLoaderLambda", maxBatchSize = 1)
     public MappedBatchLoader<String, List<Director>> mappedBatchLoader =
             keys -> CompletableFuture.supplyAsync(() ->
                     Try.tryCall(()->
                             directorServiceClient.loadDirectors(new ArrayList<>(keys))
                     ).get()
-            );
+            , executor);
 
 }
