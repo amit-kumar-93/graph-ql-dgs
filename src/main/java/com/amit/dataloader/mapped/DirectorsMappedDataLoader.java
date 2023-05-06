@@ -8,7 +8,6 @@ import org.dataloader.MappedBatchLoader;
 import org.dataloader.Try;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 @DgsComponent
 public class DirectorsMappedDataLoader {
     @Autowired
-    private DirectorServiceClient directorServiceClient;
+    DirectorServiceClient directorServiceClient;
 
     @DgsDataLoader(name = "directorsMappedDataLoaderLambda")
     public MappedBatchLoader<String, Try<Director>> mappedBatchLoader =
