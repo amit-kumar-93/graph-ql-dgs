@@ -1,16 +1,13 @@
 type Query {
-bookById(id : ID) : Book
+ shows: [Show]
 }
 
-type Book{
-id: ID
-name: String
-pageCount: Int
-author: Author
+type Show{
+title: String
+releaseYear: Int
+reviews: [Review]
 }
 
-type Author{
-id: ID
-firstName: String
-lastName: String
+type Review{
+starRating: Int
 }
