@@ -1,15 +1,39 @@
 package com.amit.dataloader;
 
+import com.amit.service.DirectorServiceClient;
+import com.amit.types.Director;
 import com.netflix.graphql.dgs.DgsDataLoader;
 import org.dataloader.BatchLoader;
+import org.dataloader.Try;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
 
-@DgsDataLoader(name="directors")
-public class DirectorDataLoader implements BatchLoader<String, Director> {
+@DgsDataLoader(name = "directors")
+public class DirectorDataLoader implements BatchLoader<String, Try<Director>> {
+
+    @Autowired
+    DirectorServiceClient directorServiceClient;
+/**
+ * Simple Data Loader
+ @Override public CompletionStage<List<Director>> load(List<String> keys) {
+ return CompletableFuture.supplyAsync(()-> directorServiceClient.loadDirectors(keys));
+ }
+ */
+
+    /**
+     * Data Loader with {@link org.dataloader.Try}
+     * @param keys
+     * @return List<T>
+     */
     @Override
-    public CompletionStage<List<Director>> load(List<String> list) {
-        return null;
+    public CompletionStage<List<Try<Director>>> load(List<String> keys) {
+        return CompletableFuture.supplyAsync(() ->
+                keys.stream()
+                        .map(key -> Try.tryCall(() -> directorServiceClient.loadDirector(keys)))
+                        .collect(Collectors.toList()));
     }
 }
