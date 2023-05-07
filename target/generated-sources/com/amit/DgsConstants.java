@@ -5,10 +5,14 @@ import java.lang.String;
 public class DgsConstants {
   public static final String QUERY_TYPE = "Query";
 
+  public static final String SUBSCRIPTION_TYPE = "Subscription";
+
   public static class QUERY {
     public static final String TYPE_NAME = "Query";
 
     public static final String Shows = "shows";
+
+    public static final String Stocks = "stocks";
 
     public static class SHOWS_INPUT_ARGUMENT {
       public static final String TitleFilter = "titleFilter";
@@ -41,5 +45,19 @@ public class DgsConstants {
     public static final String Rating = "rating";
 
     public static final String ShowsDirected = "showsDirected";
+  }
+
+  public static class SUBSCRIPTION {
+    public static final String TYPE_NAME = "Subscription";
+
+    public static final String Stocks = "stocks";
+  }
+
+  public static class STOCK {
+    public static final String TYPE_NAME = "Stock";
+
+    public static final String Name = "name";
+
+    public static final String Price = "price";
   }
 }

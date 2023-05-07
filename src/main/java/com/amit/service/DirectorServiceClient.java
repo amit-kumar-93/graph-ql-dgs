@@ -1,7 +1,6 @@
 package com.amit.service;
 
 import com.amit.types.Director;
-import com.netflix.graphql.dgs.DgsData;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

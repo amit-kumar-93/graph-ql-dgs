@@ -3,3 +3,9 @@ spring:
     graphiql:
       enabled: true
       path: /graphiql
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

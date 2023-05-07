@@ -1,5 +1,6 @@
 type Query {
  shows(titleFilter: String): [Show]
+ stocks: Stock
 }
 
 type Show{
@@ -17,4 +18,13 @@ type Director{
 name: String
 rating: Int
 showsDirected: Int
+}
+
+type Subscription {
+    stocks: Stock
+}
+
+type Stock {
+    name: String
+    price: Float
 }
