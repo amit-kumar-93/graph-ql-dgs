@@ -31,6 +31,9 @@ public class ShowService {
 
     private List<Show> shows = Arrays.asList(
             Show.newBuilder().title("Ozarks").releaseYear(2017).reviews(oarkReviews).build(),
+            Show.newBuilder().title("Orange is the new Black").releaseYear(2018).reviews(oarkReviews).build(),
+            Show.newBuilder().title("Oaths Not Taken").releaseYear(2018).reviews(oarkReviews).build(),
+            Show.newBuilder().title("Star Trek").releaseYear(1998).reviews(oarkReviews).build(),
             Show.newBuilder().title("Stranger Things").releaseYear(2016).reviews(sThingReviews).build(),
             Show.newBuilder().title("Milano").releaseYear(2015).reviews(Milano).build()
     );

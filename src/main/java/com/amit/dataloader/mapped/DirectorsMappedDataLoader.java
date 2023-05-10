@@ -31,7 +31,7 @@ public class DirectorsMappedDataLoader {
 //                   .map( x-> x.get())
 //                   .reduce((m1,m2)-> {m1.putAll(m2); return m1;}).get());
 
-    @DgsDataLoader(name = "directorsMappedDataLoaderLambda", maxBatchSize = 1)
+    @DgsDataLoader(name = "directorsMappedDataLoaderLambda", maxBatchSize = 10)
     public MappedBatchLoader<String, List<Director>> mappedBatchLoader =
             keys -> CompletableFuture.supplyAsync(() ->
                     Try.tryCall(()->

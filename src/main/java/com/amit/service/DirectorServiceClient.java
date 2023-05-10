@@ -34,7 +34,11 @@ public class DirectorServiceClient {
         List<Director> directorsMilano = Arrays.asList(
                 Director.newBuilder().name("Gooey Trump").showsDirected(5).rating(4).build()
         );
+        List<Director> directorOB = Arrays.asList(
+                Director.newBuilder().name("Gooey Trump").showsDirected(5).rating(4).build()
+        );
         showToDirectorMap.put("Ozarks", directorOzark);
+        showToDirectorMap.put("Orange is the new Black", directorOB);
         showToDirectorMap.put("Stranger Things", directorsStrangerThings);
         showToDirectorMap.put("Milano", directorsMilano);
     }

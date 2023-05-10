@@ -1,6 +1,6 @@
 package com.amit;
 
-import com.amit.datafetcher.DirectorDataFetcher;
+import com.amit.datafetcher.StocksDataFetcher;
 import com.amit.types.Stock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsQueryExecutor;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = {DgsAutoConfiguration.class, DirectorDataFetcher.class})
+@SpringBootTest(classes = {DgsAutoConfiguration.class, StocksDataFetcher.class})
 class SubscriptionDataFetcherTest {
 
     @Autowired

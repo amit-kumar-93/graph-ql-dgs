@@ -9,3 +9,10 @@ management:
     web:
       exposure:
         include: "*"
+
+dgs:
+  reload: true
+  graphql:
+    websocket:
+      path: /subscriptions
+      connection-init-timeout: 10s
