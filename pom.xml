@@ -157,7 +157,7 @@
                     <!--                            </properties>-->
                     <!--                        </bar>-->
                     <!--                    </includeEnumImports>-->
-                    <packageName>com.amit</packageName>
+                    <packageName>com.amit.server</packageName>
                     <schemaPaths>
                         <!--                        <path>src/main/resources/schema</path>-->
                         <param>src/main/resources/schema/schema.graphqls</param>

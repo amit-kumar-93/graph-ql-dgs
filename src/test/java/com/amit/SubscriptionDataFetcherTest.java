@@ -1,7 +1,7 @@
 package com.amit;
 
-import com.amit.datafetcher.StocksDataFetcher;
-import com.amit.types.Stock;
+import com.amit.server.datafetcher.StocksDataFetcher;
+import com.amit.server.types.Stock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsQueryExecutor;
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration;

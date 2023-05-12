@@ -10,9 +10,13 @@ management:
       exposure:
         include: "*"
 
+#logging:
+#  level:
+#    root: DEBUG
+
 dgs:
   reload: true
   graphql:
     websocket:
       path: /subscriptions
-      connection-init-timeout: 10s
+      connection-init-timeout: 20s
