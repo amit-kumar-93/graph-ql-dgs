@@ -19,4 +19,4 @@ dgs:
   graphql:
     websocket:
       path: /subscriptions
-      connection-init-timeout: 20s
+      connection-init-timeout: 10s

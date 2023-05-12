@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.web.reactive.config.EnableWebFlux;
 
-@SpringBootApplication(exclude = WebMvcAutoConfiguration.class)
-@EnableWebFlux
+@SpringBootApplication
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
