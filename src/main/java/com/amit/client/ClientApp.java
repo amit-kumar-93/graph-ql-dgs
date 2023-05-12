@@ -24,20 +24,13 @@ public class ClientApp implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        WebClient webClient = WebClient.create("http://localhost:8080");
-//        WebSocketClient webSocketClient = new TomcatWebSocketClient();
+    public void run(String... args) {
         ReactorNettyWebSocketClient reactorNettyWebSocketClient = new ReactorNettyWebSocketClient();
-        WebSocketGraphQLClient client = new WebSocketGraphQLClient("ws://localhost:8080/subscriptions", reactorNettyWebSocketClient );//, webSocketClient, Duration.ofSeconds(100));
-
-
-//        SSESubscriptionGraphQLClient client = new SSESubscriptionGraphQLClient("/subscriptions", webClient);
+        WebSocketGraphQLClient client = new WebSocketGraphQLClient("ws://localhost:8080/subscriptions", reactorNettyWebSocketClient);
         Flux<GraphQLResponse> stocks = client.reactiveExecuteQuery("subscription { stocks { name price }}", Collections.emptyMap());
-
-        stocks.delayElements(Duration.ofSeconds(1))
+        stocks
                 .mapNotNull(r -> r.extractValue("data.stocks"))
                 .log()
-//                .take(10)
                 .onErrorMap(Throwable::getCause)
                 .subscribe();
     }
